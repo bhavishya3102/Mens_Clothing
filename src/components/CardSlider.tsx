@@ -19,7 +19,7 @@ const CardSlider: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto ">
+    <div className="relative w-full max-w-[85rem] mx-auto ">
       {/* Slider */}
       <div className="overflow-hidden">
         <div
@@ -31,9 +31,9 @@ const CardSlider: React.FC = () => {
           {cards.map((card) => (
             <div
               key={card.id}
-              className="flex-none w-1/2 md:w-1/3 lg:w-1/4 p-4 "
+              className="flex-none w-1/2 md:w-1/3 lg:w-1/4 p-4 rounded-lg" 
             >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden border-solid border-4 border-navbarBG">
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden border-solid border-4 border-navbarBG p-2">
                 <img
                   src={card.image}
                   alt={card.text}
