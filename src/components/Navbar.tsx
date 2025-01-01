@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const mensWearCollections = [
     {
@@ -40,9 +40,9 @@ const Navbar = () => {
   ];
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsDropdownOpen(false);
       }
     };
 
