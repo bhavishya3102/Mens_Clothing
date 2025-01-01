@@ -1,3 +1,4 @@
+import CardSlider from "@/components/CardSlider";
 import Carousel from "@/components/Carousal";
 import { InfiniteSlider } from "@/components/Infinite-Slider";
 
@@ -9,6 +10,10 @@ export default function Home() {
         <h2 className="text-center font-bold tracking-wide text-gray-800 text-4xl">Our Top Brands</h2>
       </div>
       <InfiniteSlider />
+      <div className="py-6">
+        <h2 className="text-center font-bold tracking-wide text-gray-800 text-4xl">Feature Articles</h2>
+      </div>
+      <CardSlider />
     </div>
   );
 }
