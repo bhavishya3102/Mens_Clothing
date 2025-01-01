@@ -9,10 +9,10 @@ export function Carousel() {
   useEffect(() => {
     const interval = setTimeout(() => {
       setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); 
+    }, 3000);
 
     return () => clearTimeout(interval);
-  }, [imgIndex]); 
+  }, [imgIndex, images]);
 
   return (
     <div className="relative w-full">
@@ -42,9 +42,8 @@ export function Carousel() {
           <button
             key={index}
             onClick={() => setImageIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              index === imgIndex ? "bg-white w-4" : "bg-white/50"
-            }`}
+            className={`w-2 h-2 rounded-full transition-all ${index === imgIndex ? "bg-white w-4" : "bg-white/50"
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
