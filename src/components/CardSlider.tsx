@@ -44,7 +44,7 @@ const CardSlider = () => {
   };
 
   return (
-    <div className="relative w-[90%] max-w-8xl mx-auto">
+    <div className="relative w-[99%] max-w-8xl mx-auto">
       <div className="overflow-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"

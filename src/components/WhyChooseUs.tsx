@@ -20,7 +20,7 @@ export const WhyChooseUs = () => {
   ]
 
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center justify-center  ">
       <div className="grid grid-cols-1 gap-10 md:gap-5 lg:gap-10 md:grid-cols-3">
         {features.map((feature, index) => (
           <div key={index} className="group relative items-center justify-center overflow-hidden cursor-pointer hover:shadow-xl hover:shadow-black/30 transition-shadow rounded-sm">
