@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="hydrated">
       <body
-        className={`antialiased bg-navbarBG`}
+        className={`antialiased  w-full bg-[#E6E8FA] bg-opacity-50 rounded-lg shadow-lg`}
       >
 
         <Navbar />

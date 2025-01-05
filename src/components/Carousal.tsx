@@ -33,7 +33,7 @@ export function Carousel() {
   }, [nextImage, prevImage]);
 
   return (
-    <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+    <div className="relative w-full" style={{ aspectRatio: "14/9" }}>
       <div className="relative h-full overflow-hidden ">
         {images.map((imageUrl, index) => (
           <div
