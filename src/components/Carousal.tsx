@@ -52,27 +52,7 @@ export function Carousel() {
         ))}
       </div>
 
-      {/* <Button */}
-      {/*   variant="outline" */}
-      {/*   size="icon" */}
-      {/*   className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white" */}
-      {/*   onClick={prevImage} */}
-      {/*   aria-label="Previous image" */}
-      {/* > */}
-      {/*   <ChevronLeft className="h-4 w-4" /> */}
-      {/* </Button> */}
-      {/**/}
-      {/* <Button */}
-      {/*   variant="outline" */}
-      {/*   size="icon" */}
-      {/*   className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white" */}
-      {/*   onClick={nextImage} */}
-      {/*   aria-label="Next image" */}
-      {/* > */}
-      {/*   <ChevronRight className="h-4 w-4" /> */}
-      {/* </Button> */}
-
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" role="tablist">
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2" role="tablist">
         {images.map((_, index) => (
           <button
             key={index}
