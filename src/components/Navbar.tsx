@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -42,7 +43,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-      setIsDropdownOpen(false);
+        setIsDropdownOpen(false);
       }
     };
 
@@ -53,23 +54,23 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-navbarBG text-black shadow-md">
+    <nav className="bg-navbarBG sticky top-0 left-0 right-0 z-[1000] text-black shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-     
+
           <div className="flex-shrink-0">
-            <a href="/" className="text-2xl font-bold">
+            <Link href="/" className="text-2xl font-bold">
               Company Logo
-            </a>
+            </Link>
           </div>
 
-        
 
-       
+
+
           <div className="hidden md:flex items-center space-x-4">
 
-           
-          
+
+
             <input
               type="text"
               value={searchQuery}
@@ -77,7 +78,7 @@ const Navbar = () => {
               placeholder="Search here..."
               className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1c1ff] text-black"
             />
-      
+
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -102,7 +103,7 @@ const Navbar = () => {
             </div>
           </div>
 
-        
+
           <div className="md:hidden">
             <button
               className="hover:text-black focus:outline-none"

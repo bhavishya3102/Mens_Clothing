@@ -30,7 +30,7 @@ export function Carousel() {
   }, [nextImage, prevImage]);
 
   return (
-    <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+    <>
       <div className="relative h-[calc(100vh-65px)] overflow-hidden ">
         {images.map((imageUrl, index) => (
           <div
@@ -52,7 +52,7 @@ export function Carousel() {
         ))}
       </div>
 
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2" role="tablist">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2" role="tablist">
         {images.map((_, index) => (
           <button
             key={index}
@@ -65,7 +65,7 @@ export function Carousel() {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }
 
