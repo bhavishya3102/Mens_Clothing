@@ -1,9 +1,6 @@
 "use client";
-
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
-// import { ChevronLeft, ChevronRight } from 'lucide-react';
-// import { Button } from "@/components/ui/button";
 
 export function Carousel() {
   const [imgIndex, setImageIndex] = useState(0);
@@ -33,8 +30,8 @@ export function Carousel() {
   }, [nextImage, prevImage]);
 
   return (
-    <div className="relative w-full" style={{ aspectRatio: "14/9" }}>
-      <div className="relative h-full overflow-hidden ">
+    <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+      <div className="relative h-[calc(100vh-65px)] overflow-hidden ">
         {images.map((imageUrl, index) => (
           <div
             key={imageUrl}
