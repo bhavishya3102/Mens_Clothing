@@ -1,4 +1,5 @@
 import { AnimatedTestimonialsDemo } from "@/components/AnimatedTestimonialsDemo";
+import { BackgroundBoxesDemo } from "@/components/BackgroundBoxesDemo";
 import CardSlider from "@/components/CardSlider";
 import Carousel from "@/components/Carousal";
 import { InfiniteSlider } from "@/components/Infinite-Slider";
@@ -30,6 +31,7 @@ export default function Home() {
           <AnimatedTestimonialsDemo />
         </div>
       </div>
+      <BackgroundBoxesDemo/>
     </div>
   );
 }
