@@ -18,11 +18,9 @@ export default function RootLayout({
       <body
         className={`antialiased  w-full bg-[#E6E8FA] bg-opacity-50 rounded-lg shadow-lg`}
       >
-
         <Navbar />
-        
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

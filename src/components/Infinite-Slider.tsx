@@ -4,20 +4,20 @@
 import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 
+// { name: 'Brand 1', logo: '/placeholder.svg?height=80&width=120' },
+// { name: 'Brand 2', logo: '/placeholder.svg?height=80&width=120' },
+// { name: 'Brand 3', logo: '/placeholder.svg?height=80&width=120' },
+// { name: 'Brand 4', logo: '/placeholder.svg?height=80&width=120' },
+// { name: 'Brand 5', logo: '/placeholder.svg?height=80&width=120' },
+// { name: 'Brand 6', logo: '/placeholder.svg?height=80&width=120' },
 const BRANDS = [
-  // { name: 'Brand 1', logo: '/placeholder.svg?height=80&width=120' },
-  // { name: 'Brand 2', logo: '/placeholder.svg?height=80&width=120' },
-  // { name: 'Brand 3', logo: '/placeholder.svg?height=80&width=120' },
-  // { name: 'Brand 4', logo: '/placeholder.svg?height=80&width=120' },
-  // { name: 'Brand 5', logo: '/placeholder.svg?height=80&width=120' },
-  // { name: 'Brand 6', logo: '/placeholder.svg?height=80&width=120' },
   { name: 'Brand 1', logo: 'https://picsum.photos/800/1200?random=2' },
   { name: 'Brand 2', logo: 'https://picsum.photos/800/1200?random=5' },
   { name: 'Brand 3', logo: 'https://picsum.photos/800/1200?random=7' },
   { name: 'Brand 4', logo: 'https://picsum.photos/800/1200?random=2' },
   { name: 'Brand 5', logo: 'https://picsum.photos/800/1200?random=7' },
   { name: 'Brand 6', logo: 'https://picsum.photos/800/1200?random=9' },
- 
+
 ]
 
 export function InfiniteSlider() {
