@@ -12,7 +12,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   price,
 }) => {
   return (
-    <div className="p-6  shadow-lg rounded-lg">
+    <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Product Details</h2>
       <p className="text-gray-700 mb-4">{description}</p>
 

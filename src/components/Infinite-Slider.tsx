@@ -98,13 +98,13 @@ export function InfiniteSlider() {
               key={index}
               className="w-[200px] flex-shrink-0 px-4"
             >
-              <div className="rounded-lg bg-white p-4 shadow">
+              <div className="rounded-lg p-3 bg-white shadow">
                 <Image
                   src={brand.logo}
                   alt={`${brand.name} logo`}
-                  width={120}
-                  height={80}
-                  className="mx-auto h-20 w-auto object-contain"
+                  width={150}
+                  height={50}
+                  className="mx-auto aspect-square"
                 />
               </div>
             </div>
