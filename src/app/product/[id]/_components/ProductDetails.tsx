@@ -32,9 +32,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
 
       <div className="flex justify-between items-center">
         <span className="text-2xl font-bold text-gray-800">${price}</span>
-        <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        {/* <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           Checkout
-        </button>
+        </button> */}
       </div>
     </div>
   );

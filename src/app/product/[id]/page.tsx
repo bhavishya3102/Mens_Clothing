@@ -17,11 +17,11 @@ const CheckoutPage: React.FC = () => {
 
   return (
     <div className="min-h-screenflex items-center justify-center">
-      <div className="container mx-auto shadow-lg rounded-lg p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="col-span-1">
+      <div className="container mx-auto shadow-lg rounded-lg p-6 flex flex-col md:flex-row justify-around gap-2 pb-[5rem]">
+        <div className="">
           <ProductImages images={product.images} />
         </div>
-        <div className="col-span-2">
+        <div className="">
           <ProductDetails
             description={product.description}
             sizes={product.sizes}
@@ -29,7 +29,7 @@ const CheckoutPage: React.FC = () => {
           />
         </div>
       </div>
-      <div className="py-6">
+      <div className="py-12">
         <h2 className="text-center font-bold tracking-wide text-gray-800 text-4xl">Similiar Products</h2>
       </div>
       <CardSlider />

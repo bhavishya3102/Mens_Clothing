@@ -10,17 +10,18 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState(images[0]);
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
-      <div className="mb-4">
-        <Image
-          width={100}
-          height={100}
-          src={selectedImage}
-          alt="Selected Product"
-          className="w-64 h-72 object-cover rounded-lg shadow-lg"
-        />
-      </div>
+      <div className="mb-4 group relative overflow-hidden rounded-lg shadow-lg">
+  <Image
+    width={250}
+    height={200}
+    src={selectedImage}
+    alt="Selected Product"
+    className="w-80 h-96 object-cover rounded-lg transform transition-transform duration-300 ease-in-out group-hover:scale-110"
+  />
+</div>
 
-      <div className="flex flex-row items-center justify-center gap-2">
+
+      <div className="flex flex-row items-center justify-center gap-4 mt-4">
         {images.map((image, index) => (
           <div
             key={index}
@@ -29,11 +30,11 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
             onClick={() => setSelectedImage(image)} // Set the clicked image as the selected image
           >
             <Image
-              width={100}
-              height={100}
+              width={150}
+              height={150}
               src={image}
               alt={`Product ${index}`}
-              className="w-24 h-24 object-cover rounded-lg shadow"
+              className="w-28 h-28 object-cover rounded-lg shadow"
             />
           </div>
         ))}

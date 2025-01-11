@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 
 export function Carousel() {
   const [imgIndex, setImageIndex] = useState(0);
-  const images = ["https://picsum.photos/800/1200?random=1", "https://picsum.photos/800/1200?random=2", "https://picsum.photos/800/1200?random=3"]
+  const images = ["https://picsum.photos/800/1200?random=19", "https://picsum.photos/800/1200?random=2", "https://picsum.photos/800/1200?random=18"]
   // const images = [...Array(5)].map((_, index) => `/random_image_${index + 1}.avif`);
 
   const nextImage = useCallback(() => {
