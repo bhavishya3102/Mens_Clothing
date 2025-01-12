@@ -3,7 +3,9 @@ import { BackgroundBoxesDemo } from "@/components/BackgroundBoxesDemo";
 import CardSlider from "@/components/CardSlider";
 import Carousel from "@/components/Carousal";
 import { InfiniteSlider } from "@/components/Infinite-Slider";
+import ReturnPolicy from "@/components/ReturnPolicy";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
+
 
 export default function Home() {
   return (
@@ -17,6 +19,7 @@ export default function Home() {
         <h2 className="text-center font-bold tracking-wide text-gray-800 text-4xl">Our Top Brands</h2>
       </div>
       <InfiniteSlider />
+     
       <div className="py-6">
         <h2 className="text-center font-bold tracking-wide text-gray-800 text-4xl">Why Choose Us</h2>
       </div>
@@ -28,7 +31,10 @@ export default function Home() {
           <h2 className="text-center font-bold tracking-wide text-gray-800 text-4xl">Trending Items</h2>
         </div>
         <AnimatedTestimonialsDemo />
+       
+      
       </div>
+     <ReturnPolicy />
       <BackgroundBoxesDemo />
     </div>
   );

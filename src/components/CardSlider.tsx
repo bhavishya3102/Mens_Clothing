@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import Link from "next/link";
 
 const CardSlider = () => {
   const cards = Array.from({ length: 10 }, (_, i) => ({
@@ -53,11 +54,8 @@ const CardSlider = () => {
           }}
         >
           {cards.map((card) => (
-            <div
-              key={card.id}
-              className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4"
-              style={{ flex: `0 0 ${100 / slidesPerView}%` }}
-            >
+          <Link key={card.id} style={{ flex: `0 0 ${100 / slidesPerView}%` }} href={'/products'} className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4">
+           
               <div className="bg-white rounded-lg shadow-lg overflow-hidden border-4 border-solid border-gray-200 p-2">
                 <div className="relative w-full h-72">
                   <Image
@@ -72,7 +70,8 @@ const CardSlider = () => {
                   <p className="text-lg font-medium text-gray-800">{card.text}</p>
                 </div>
               </div>
-            </div>
+           
+          </Link>
           ))}
         </div>
       </div>
