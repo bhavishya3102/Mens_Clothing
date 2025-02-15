@@ -1,90 +1,102 @@
+'use client';
 
-'use client'
+import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { getBrands } from '@/lib/fetchBrands';
+import imageUrlBuilder from '@sanity/image-url';
+import { client } from '../sanity/lib/client';
 
-import { useRef, useEffect } from 'react'
-import Image from 'next/image'
+// Create the builder
+const builder = imageUrlBuilder(client);
 
-// { name: 'Brand 1', logo: '/placeholder.svg?height=80&width=120' },
-// { name: 'Brand 2', logo: '/placeholder.svg?height=80&width=120' },
-// { name: 'Brand 3', logo: '/placeholder.svg?height=80&width=120' },
-// { name: 'Brand 4', logo: '/placeholder.svg?height=80&width=120' },
-// { name: 'Brand 5', logo: '/placeholder.svg?height=80&width=120' },
-// { name: 'Brand 6', logo: '/placeholder.svg?height=80&width=120' },
-const BRANDS = [
-  { name: 'Brand 1', logo: 'https://picsum.photos/800/1200?random=2' },
-  { name: 'Brand 2', logo: 'https://picsum.photos/800/1200?random=5' },
-  { name: 'Brand 3', logo: 'https://picsum.photos/800/1200?random=7' },
-  { name: 'Brand 4', logo: 'https://picsum.photos/800/1200?random=2' },
-  { name: 'Brand 5', logo: 'https://picsum.photos/800/1200?random=7' },
-  { name: 'Brand 6', logo: 'https://picsum.photos/800/1200?random=9' },
-
-]
+interface Brand {
+  _id: string;
+  brandImage: string;
+  brandName: string;
+}
 
 export function InfiniteSlider() {
-  const sliderRef = useRef<HTMLDivElement>(null)
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [brands, setBrands] = useState<Brand[]>([]);
+  const [loading, setLoading] = useState(true); // Track loading state
 
   useEffect(() => {
-    const slider = sliderRef.current
-    if (!slider) return
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const data = await getBrands();
+        setBrands(data);
+      } catch (error) {
+        console.error('Error fetching brands:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
 
-    let animationId: number
-    let startX: number
-    let scrollLeft: number
-    let isDown: boolean = false
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let animationId: number;
+    let startX: number;
+    let scrollLeft: number;
+    let isDown: boolean = false;
 
     const scroll = () => {
-      if (!slider) return
+      if (!slider) return;
       if (slider.scrollLeft >= slider.scrollWidth / 2) {
-        slider.scrollLeft = 0
+        slider.scrollLeft = 0;
       } else {
-        slider.scrollLeft += 1
+        slider.scrollLeft += 1;
       }
-      animationId = requestAnimationFrame(scroll)
-    }
+      animationId = requestAnimationFrame(scroll);
+    };
 
     const startScrolling = () => {
-      animationId = requestAnimationFrame(scroll)
-    }
+      animationId = requestAnimationFrame(scroll);
+    };
 
     const stopScrolling = () => {
-      cancelAnimationFrame(animationId)
-    }
+      cancelAnimationFrame(animationId);
+    };
 
     const onMouseDown = (e: MouseEvent) => {
-      isDown = true
-      startX = e.pageX - slider.offsetLeft
-      scrollLeft = slider.scrollLeft
-      stopScrolling()
-    }
+      isDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+      stopScrolling();
+    };
 
     const onMouseUp = () => {
-      isDown = false
-      startScrolling()
-    }
+      isDown = false;
+      startScrolling();
+    };
 
     const onMouseMove = (e: MouseEvent) => {
-      if (!isDown) return
-      e.preventDefault()
-      const x = e.pageX - slider.offsetLeft
-      const walk = (x - startX) * 2
-      slider.scrollLeft = scrollLeft - walk
-    }
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2;
+      slider.scrollLeft = scrollLeft - walk;
+    };
 
-    slider.addEventListener('mousedown', onMouseDown)
-    slider.addEventListener('mouseleave', onMouseUp)
-    slider.addEventListener('mouseup', onMouseUp)
-    slider.addEventListener('mousemove', onMouseMove)
+    slider.addEventListener('mousedown', onMouseDown);
+    slider.addEventListener('mouseleave', onMouseUp);
+    slider.addEventListener('mouseup', onMouseUp);
+    slider.addEventListener('mousemove', onMouseMove);
 
-    startScrolling()
+    startScrolling();
 
     return () => {
-      stopScrolling()
-      slider.removeEventListener('mousedown', onMouseDown)
-      slider.removeEventListener('mouseleave', onMouseUp)
-      slider.removeEventListener('mouseup', onMouseUp)
-      slider.removeEventListener('mousemove', onMouseMove)
-    }
-  }, [])
+      stopScrolling();
+      slider.removeEventListener('mousedown', onMouseDown);
+      slider.removeEventListener('mouseleave', onMouseUp);
+      slider.removeEventListener('mouseup', onMouseUp);
+      slider.removeEventListener('mousemove', onMouseMove);
+    };
+  }, []);
 
   return (
     <div className="w-full overflow-hidden bg-gray-50 py-10">
@@ -93,25 +105,34 @@ export function InfiniteSlider() {
           ref={sliderRef}
           className="flex w-max animate-slide cursor-grab active:cursor-grabbing"
         >
-          {[...BRANDS, ...BRANDS].map((brand, index) => (
-            <div
-              key={index}
-              className="w-[200px] flex-shrink-0 px-4"
-            >
-              <div className="rounded-lg p-3 bg-white shadow">
-                <Image
-                  src={brand.logo}
-                  alt={`${brand.name} logo`}
-                  width={150}
-                  height={50}
-                  className="mx-auto aspect-square"
-                />
-              </div>
-            </div>
-          ))}
+          {loading
+            ? // Show shimmer effect while loading
+              Array.from({ length: 12 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="w-[200px] flex-shrink-0 px-4"
+                >
+                  <div className="rounded-lg p-3 bg-white shadow animate-pulse">
+                    <div className="w-[180px] h-[120px] bg-gray-300 rounded mx-auto"></div>
+                  </div>
+                </div>
+              ))
+            : // Show actual brands when data is loaded
+              [...brands, ...brands].map((brand, index) => (
+                <div key={index} className="w-[200px] flex-shrink-0 px-4">
+                  <div className="rounded-lg p-3 bg-white shadow">
+                    <Image
+                      src={builder.image(brand.brandImage).url()}
+                      alt={`${brand.brandName} logo`}
+                      width={150}
+                      height={50}
+                      className="mx-auto aspect-square"
+                    />
+                  </div>
+                </div>
+              ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
-

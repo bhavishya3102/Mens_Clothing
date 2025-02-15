@@ -1,5 +1,5 @@
 import { DocumentTextIcon } from '@sanity/icons'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const productType = defineType({
   name: 'product',
@@ -8,88 +8,94 @@ export const productType = defineType({
   icon: DocumentTextIcon,
   fields: [
     defineField({
-      name: 'title',
+      name: 'name',
+      title: 'Product Name',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'slug',
-      type: 'slug',
+      name: 'images',
+      title: 'Product Images',
+      type: 'array',
+      of: [
+        defineField({
+          name: 'image',
+          title: 'Image',
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative text',
+            }
+          ]
+        })
+      ],
+      validation: (Rule) => Rule.min(1).max(3),
+    }),
+    defineField({
+      name: 'brand',
+      title: 'Brand',
+      type: 'reference',
+      to: [{ type: 'brand' }],
+    }),
+    defineField({
+      name: 'category',
+      type: 'reference',
+      to: [{ type: 'category' }],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+    }),
+    defineField({
+      name: 'size',
+      title: 'Available Sizes',
+      type: 'array',
+      of: [{ type: 'string' }],
       options: {
-        source: 'title',
+        list: [
+          { title: 'Large', value: 'L' },
+          { title: 'Extra Large', value: 'XL' },
+          { title: 'Double Extra Large', value: 'XXL' },
+        ],
       },
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'price',
+      title: 'Price',
       type: 'number',
+      validation: (Rule) => Rule.required().positive(),
     }),
     defineField({
-      name: 'stock',
+      name: 'discount_price',
+      title: 'Discount Price',
       type: 'number',
-      description: 'Number of items available in stock',
+      validation: (Rule) => Rule.positive(),
     }),
     defineField({
-      name: 'inStock',
-      type: 'boolean',
-      initialValue: true,
+      name: 'stock_quantity',
+      title: 'Stock Quantity',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
-      name: 'mainImage',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-        }
-      ]
-    }),
-    defineField({
-      name: 'categories',
-      type: 'array',
-      of: [defineArrayMember({ type: 'reference', to: { type: 'category' } })],
-    }),
-    defineField({
-      name: 'publishedAt',
+      name: 'createdAt',
+      title: 'Created At',
       type: 'datetime',
-    }),
-    defineField({
-      name: 'body',
-      type: 'blockContent',
-    }),
-    defineField({
-      name: 'tags',
-      type: 'array',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'metaTitle',
-      type: 'string',
-      description: 'Custom meta title for SEO',
-    }),
-    defineField({
-      name: 'metaDescription',
-      type: 'string',
-      description: 'Custom meta description for SEO',
-    }),
-    defineField({
-      name: 'metaKeywords',
-      type: 'array',
-      of: [{ type: 'string' }],
-      description: 'Custom meta keywords for SEO',
+      initialValue: () => new Date().toISOString(),
     }),
   ],
   preview: {
     select: {
-      title: 'title',
-      image: 'image',
-      media: 'mainImage',
-    },
-    prepare(selection) {
-      const { image } = selection
-      return { ...selection, imageUrl: image }
+      title: 'name',
+      media: 'images.0',
     },
   },
 })

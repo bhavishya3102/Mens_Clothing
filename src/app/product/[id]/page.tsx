@@ -1,38 +1,107 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation"; // For getting the id from URL
+import { client } from "@/sanity/lib/client";
 import ProductImages from "./_components/ProductImages";
 import ProductDetails from "./_components/ProductDetails";
 import CardSlider from "@/components/CardSlider";
+import { Loader } from "lucide-react";
+
+interface Product {
+  _id: string;
+  name: string;
+  images: {
+    asset: {
+      url: string;
+    };
+  }[];
+  description: string;
+  size: string[];
+  price: number;
+  discount_price: number;
+  stock_quantity: number;
+}
 
 const CheckoutPage: React.FC = () => {
-  const product = {
-    images: [
-      "https://picsum.photos/800/1200?random=1",
-      "https://picsum.photos/800/1200?random=4",
-      "https://picsum.photos/800/1200?random=6",
-    ],
-    description: "This is a high-quality product that you will absolutely love!",
-    sizes: ["S", "M", "L", "XL"],
-    price: 49.99,
-  };
+  const params = useParams();
+  const productId = params.id;
+
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!productId) return;
+
+    const fetchProduct = async () => {
+      try {
+        const query = `*[_type == "product" && _id == $id][0]{
+          name,
+          images[] {
+            asset->{
+              _id,
+              url
+            }
+          },
+          description,
+          size,
+          price,
+          discount_price,
+          stock_quantity
+        }`;
+        const data = await client.fetch(query, { id: productId });
+        setProduct(data);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [productId]);
+
+  if (loading) {
+    return <div className="flex justify-center items-center h-64">
+    <Loader className="text-4xl text-gray-500 animate-spin" />
+  </div>  }
+
+  if (!product) {
+    return <div className="text-center p-10 text-red-500">Product not found.</div>;
+  }
 
   return (
-    <div className="min-h-screenflex items-center justify-center">
-      <div className="container mx-auto shadow-lg rounded-lg p-6 flex flex-col md:flex-row justify-around gap-2 pb-[5rem]">
-        <div className="">
-          <ProductImages images={product.images} />
-        </div>
-        <div className="">
-          <ProductDetails
-            description={product.description}
-            sizes={product.sizes}
-            price={product.price}
-          />
+    <div className="min-h-screen flex flex-col">
+      {/* Main Content */}
+      <div className="flex-1 flex items-center justify-center">
+        <div className="container mx-auto shadow-lg rounded-lg p-6 flex flex-col md:flex-row justify-around gap-4">
+          <div className="w-full md:w-1/2">
+            <ProductImages images={product.images.map((img) => img.asset.url)} />
+          </div>
+          <div className="w-full md:w-1/2">
+            <ProductDetails
+              name={product.name}
+              description={product.description}
+              sizes={product.size}
+              price={product.price}
+              discountPrice={product.discount_price}
+              stock={product.stock_quantity}
+            />
+          </div>
         </div>
       </div>
-      <div className="py-12">
-        <h2 className="text-center font-bold tracking-wide text-gray-800 text-4xl">Similiar Products</h2>
+
+      {/* Similar Products Section */}
+      <div className="py-8">
+        <h2 className="text-center font-bold tracking-wide text-gray-800 text-4xl">
+          Similar Products
+        </h2>
       </div>
-      <CardSlider />
+
+      {/* Card Slider (Placed at the Bottom) */}
+      <div className="pb-12">
+        <CardSlider />
+      </div>
     </div>
   );
 };

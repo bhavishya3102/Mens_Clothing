@@ -1,10 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
+import image4 from "../assets/image4.webp"
+import image2 from "../assets/image2.webp"
+import image3 from "../assets/image3.webp"
 
 export function Carousel() {
   const [imgIndex, setImageIndex] = useState(0);
-  const images = ["https://picsum.photos/800/1200?random=19", "https://picsum.photos/800/1200?random=2", "https://picsum.photos/800/1200?random=18"]
+  const images = [image4, image2, image3]
   // const images = [...Array(5)].map((_, index) => `/random_image_${index + 1}.avif`);
 
   const nextImage = useCallback(() => {
@@ -35,7 +38,7 @@ export function Carousel() {
       <div className="relative h-[calc(100vh-65px)] overflow-hidden ">
         {images.map((imageUrl, index) => (
           <div
-            key={imageUrl}
+            key={index}
             className={`absolute w-full h-full transition-opacity duration-500 ease-in-out ${index === imgIndex ? "opacity-100" : "opacity-0"
               }`}
             aria-hidden={index !== imgIndex}

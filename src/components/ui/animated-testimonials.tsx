@@ -6,10 +6,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type Testimonial = {
-  quote: string;
-  name: string;
-  designation: string;
-  src: string;
+    _id: string;
+  ProductName: string;
+  tagline: string;
+  description: string;
+  imageUrl: string;
 };
 
 export const AnimatedTestimonials = ({
@@ -50,7 +51,7 @@ export const AnimatedTestimonials = ({
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
-                  key={testimonial.src}
+                  key={testimonial.imageUrl}
                   initial={{
                     opacity: 0,
                     scale: 0.9,
@@ -80,8 +81,8 @@ export const AnimatedTestimonials = ({
                   className="absolute inset-0 origin-bottom"
                 >
                   <Image
-                    src={testimonial.src}
-                    alt={testimonial.name}
+                    src={testimonial.imageUrl}
+                    alt={testimonial.ProductName}
                     width={500}
                     height={500}
                     draggable={false}
@@ -113,13 +114,13 @@ export const AnimatedTestimonials = ({
             }}
           >
             <h3 className="text-2xl font-bold dark:text-white text-black">
-              {testimonials[active].name}
+              {testimonials[active].ProductName}
             </h3>
             <p className="text-sm text-gray-500 dark:text-neutral-500">
-              {testimonials[active].designation}
+              {testimonials[active].tagline}
             </p>
             <motion.p className="text-lg text-gray-500 mt-8 dark:text-neutral-300">
-              {testimonials[active].quote.split(" ").map((word, index) => (
+              {testimonials[active].description.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
                   initial={{

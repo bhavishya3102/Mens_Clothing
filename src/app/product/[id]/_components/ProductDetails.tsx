@@ -1,19 +1,26 @@
 import React from "react";
 
 interface ProductDetailsProps {
+  name: string;
   description: string;
   sizes: string[];
   price: number;
+  discountPrice: number;
+  stock: number;
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({
+  name,
   description,
   sizes,
   price,
+  discountPrice,
+  stock
 }) => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Product Details</h2>
+      <h1 className="text-2xl font-semibold mb-4">{name}</h1>
       <p className="text-gray-700 mb-4">{description}</p>
 
       <div className="mb-6">
@@ -31,7 +38,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
       </div>
 
       <div className="flex justify-between items-center">
-        <span className="text-2xl font-bold text-gray-800">${price}</span>
+        <span className="text-2xl font-bold text-gray-800">Price: ${price}</span>
+        <span className="text-2xl font-bold text-gray-800">Discount Price: ${discountPrice}</span>
+        <span className="text-2xl font-bold text-gray-800">Stock: {stock}</span>
         {/* <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           Checkout
         </button> */}

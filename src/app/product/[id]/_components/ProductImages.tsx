@@ -16,8 +16,12 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
     height={200}
     src={selectedImage}
     alt="Selected Product"
-    className="w-80 h-96 object-cover rounded-lg transform transition-transform duration-300 ease-in-out group-hover:scale-110"
+    className="w-80 h-96 object-contain rounded-lg transform transition-transform duration-300 ease-in-out group-hover:scale-110"
+    sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 23vw"
+
   />
+
+
 </div>
 
 
