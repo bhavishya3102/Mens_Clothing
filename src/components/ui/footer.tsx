@@ -5,7 +5,8 @@ import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { getCategories } from '@/lib/fetchCategories'
 
 const pages = [
   { name: "About Us", href: "/about-us" },
@@ -15,7 +16,25 @@ const pages = [
   { name: "Terms of Service", href: "/terms-of-service" },
 ]
 
+interface Category {
+  _id: string;
+  slug: string;
+  title: string;
+}
+
 export function Footer() {
+  const [categories, setCategories] = useState<Category[]>([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    }
+    fetchData();
+  }, []);
  
 
 
@@ -26,7 +45,13 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Categories</h3>
             <ul className="space-y-2">
-             
+              {categories.map((category) => (
+                <li key={category._id}>
+                  <Link href={`/categories/${category.slug}`} className="hover:underline">
+                    {category.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>

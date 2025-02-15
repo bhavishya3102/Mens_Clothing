@@ -35,14 +35,15 @@ interface ContactData {
     message: string;
 }
 const firebaseConfig = {
-  apiKey: "AIzaSyBMUM-aR7XMawraA3TQ5irBL_dZKt9tDsE",
-  authDomain: "varvastra-4a44c.firebaseapp.com",
-  projectId: "varvastra-4a44c",
-  storageBucket: "varvastra-4a44c.firebasestorage.app",
-  messagingSenderId: "918438893014",
-  appId: "1:918438893014:web:fd560cc54c483174960077",
-  measurementId: "G-GP9SZDNJ1K"
+apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
