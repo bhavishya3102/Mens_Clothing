@@ -22,16 +22,16 @@ const AboutUs = () => {
 
                 {/* Content Section */}
                 <div className="bg-white bg-opacity-90 p-8 rounded-lg h-[80vh] py-5">
-                    <p className="text-xl italic text-center mb-6 text-gray-700">"Style that speaks for you."</p>
+                    <p className="text-xl italic text-center mb-6 text-gray-700">&quot;Style that speaks for you.&quot;</p>
 
                     <div className="mb-6 text-center">
-                        <h2 className="text-3xl font-bold text-gray-900">Men's Elite Fashion</h2>
-                        <p className="text-gray-700">Your go-to store for premium men’s clothing.</p>
+                        <h2 className="text-3xl font-bold text-gray-900">Men&apos;s Elite Fashion</h2>
+                        <p className="text-gray-700">Your go-to store for premium men&apos;s clothing.</p>
                     </div>
 
                     <div className="mb-6">
                         <h3 className="text-2xl font-semibold text-gray-900">Our Mission</h3>
-                        <p className="text-gray-700">We aim to provide high-quality, stylish, and affordable men's fashion that keeps you looking sharp for every occasion.</p>
+                        <p className="text-gray-700">We aim to provide high-quality, stylish, and affordable men&apos;s fashion that keeps you looking sharp for every occasion.</p>
                     </div>
 
                     <div className="mb-6">
@@ -55,7 +55,7 @@ const AboutUs = () => {
                 <span className="font-semibold">Address:</span>
                 D-13, Central Market,<br />
                 Lajpat Nagar-2, Near 24 Seven Store,<br />
-                3C's Road, New Delhi - 110024
+                3C&apos;s Road, New Delhi - 110024
             </div>
         </li>
     </ul>
