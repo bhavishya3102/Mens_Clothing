@@ -79,21 +79,21 @@ const CardSlider = () => {
         >
           {loading
             ? // Show shimmer effect while loading
-              Array.from({ length: slidesPerView }).map((_, index) => (
-                <div
-                  key={index}
-                  style={{ flex: `0 0 ${100 / slidesPerView}%` }}
-                  className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4"
-                >
-                  <div className="bg-white rounded-lg shadow-lg overflow-hidden border-4 border-solid border-gray-200 p-2 animate-pulse">
-                    <div className="relative w-full h-[300px] bg-gray-300"></div>
-                    <div className="p-4">
-                      <div className="h-4 w-3/4 bg-gray-300 rounded mb-2"></div>
-                      <div className="h-3 w-1/2 bg-gray-300 rounded"></div>
-                    </div>
+            Array.from({ length: slidesPerView }).map((_, index) => (
+              <div
+                key={index}
+                style={{ flex: `0 0 ${100 / slidesPerView}%` }}
+                className="flex-none w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-2 md:p-4"
+              >
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden border-4 border-solid border-gray-200 p-2 animate-pulse">
+                  <div className="relative w-full h-[250px] md:h-[300px] bg-gray-300"></div>
+                  <div className="p-4">
+                    <div className="h-4 w-3/4 bg-gray-300 rounded mb-2"></div>
+                    <div className="h-3 w-1/2 bg-gray-300 rounded"></div>
                   </div>
                 </div>
-              ))
+              </div>
+            ))
             : // Show actual products when data is loaded
               products.map((product) => (
                 <Link
