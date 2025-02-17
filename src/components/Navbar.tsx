@@ -79,6 +79,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-6">
             <Link href="/aboutus" className="font-semibold">About Us</Link>
             <Link href="/contact" className="font-semibold">Contact Us</Link>
+            <Link href="/studio" className="font-semibold">Add Products</Link>
 
             <input
               type="text"
@@ -178,6 +179,9 @@ const Navbar = () => {
             </Link>
             <Link href="/contact" className="block py-2 font-semibold" onClick={() => setIsMobileMenuOpen(false)}>
               Contact Us
+            </Link>
+            <Link href="/studio" className="block py-2 font-semibold" onClick={() => setIsMobileMenuOpen(false)}>
+              Add Products
             </Link>
           </div>
         </div>

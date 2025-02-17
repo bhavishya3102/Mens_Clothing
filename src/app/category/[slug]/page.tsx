@@ -19,11 +19,12 @@ export default function Page() {
   const category = pathname.split("/").pop(); // Get last part of URL as category
 
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); // Loading state
+  const [loading, setLoading] = useState<boolean>(true);
+  const [sortOrder, setSortOrder] = useState<string>("default"); // Sort state
 
   useEffect(() => {
     const fetchProducts = async () => {
-      setLoading(true); // Show loading indicator
+      setLoading(true);
       try {
         const query = `*[_type == "product" && category->slug.current == "${category}"]{
           _id,
@@ -33,24 +34,51 @@ export default function Page() {
           "imageUrl": images[0].asset->url
         }`;
         
-        const data = await client.fetch(query, { category });
+        const data = await client.fetch(query);
         console.log("Fetched Data:", data);
         setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
-        setLoading(false); // Hide loading indicator
+        setLoading(false);
       }
     };
 
     fetchProducts();
-  }, [category]); // Re-run when category changes
+  }, [category]);
+
+  // ✅ Sorting function (High to Low & Low to High)
+  const handleSortChange = (order: string) => {
+    setSortOrder(order);
+    const sortedProducts = [...products];
+
+    if (order === "lowToHigh") {
+      sortedProducts.sort((a, b) => a.discount_price - b.discount_price);
+    } else if (order === "highToLow") {
+      sortedProducts.sort((a, b) => b.discount_price - a.discount_price);
+    }
+
+    setProducts(sortedProducts);
+  };
 
   return (
     <main className="py-8 px-4 max-w-8xl mx-auto">
-      <h1 className="text-4xl text-center font-bold mb-8">All {category}&apos;s</h1>
+      <h1 className="text-4xl text-center font-bold ">All {category}&apos;s</h1>
 
-      {/* Show Loading Indicator Instead of Products */}
+      {/* Sort Dropdown */}
+      <div className="flex justify-end mb-20 mt-0">
+        <select 
+          value={sortOrder}
+          onChange={(e) => handleSortChange(e.target.value)}
+          className="border p-2 rounded-md text-gray-700"
+        >
+          <option value="default">Sort By</option>``
+          <option value="lowToHigh">Price: Low to High</option>
+          <option value="highToLow">Price: High to Low</option>
+        </select>
+      </div>
+
+      {/* Show Loading Indicator */}
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <Loader className="text-4xl text-gray-500 animate-spin" />
