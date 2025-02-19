@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
-import image4 from "../assets/image4.webp"
-import image2 from "../assets/image2.webp"
-import image3 from "../assets/image3.webp"
+import image4 from "../assets/image4.jpg"
+import image2 from "../assets/image2.jpg"
+import image3 from "../assets/image3.jpg"
 
 export function Carousel() {
   const [imgIndex, setImageIndex] = useState(0);
@@ -43,15 +43,16 @@ export function Carousel() {
               }`}
             aria-hidden={index !== imgIndex}
           >
-            <Image
-              src={imageUrl}
-              alt={`Slide ${index + 1}`}
-              fill
-              priority={index === imgIndex}
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-              loading={Math.abs(index - imgIndex) <= 1 ? "eager" : "lazy"}
-            />
+          <Image
+  src={imageUrl}
+  alt={`Slide ${index + 1}`}
+  fill
+  priority={index === imgIndex}
+  className="object-cover object-top"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+  loading={Math.abs(index - imgIndex) <= 1 ? "eager" : "lazy"} 
+/>
+
           </div>
         ))}
       </div>
