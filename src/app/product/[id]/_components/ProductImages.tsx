@@ -10,7 +10,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState(images[0]);
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
-      <div className="mb-4 group relative overflow-hidden rounded-lg shadow-lg">
+      <div className="mb-4 group relative overflow-hidden rounded-lg shadow-lg bg-[#fef5eb]">
   <Image
     width={250}
     height={200}
@@ -29,7 +29,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
         {images.map((image, index) => (
           <div
             key={index}
-            className={`cursor-pointer border-2 ${selectedImage === image ? "border-blue-500" : "border-transparent"
+            className={`cursor-pointer border-4 ${selectedImage === image ? "border-[#b08355]" : "border-transparent"
               } rounded-lg`}
             onClick={() => setSelectedImage(image)} // Set the clicked image as the selected image
           >

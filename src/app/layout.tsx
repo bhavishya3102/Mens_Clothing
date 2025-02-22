@@ -15,9 +15,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="hydrated">
-      <body
-        className={`antialiased  w-full`}
-      >
+     <body className="antialiased w-full bg-[#f8e2c8]">
+
         <Navbar />
         {children}
         <Footer />

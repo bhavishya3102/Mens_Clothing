@@ -70,7 +70,7 @@ export default function Page() {
         <select 
           value={sortOrder}
           onChange={(e) => handleSortChange(e.target.value)}
-          className="border p-2 rounded-md text-gray-700"
+          className=" p-2 rounded-md text-gray-700 bg-[#f8ecd7] border-4 border-solid border-[#a07436] "
         >
           <option value="default">Sort By</option>``
           <option value="lowToHigh">Price: Low to High</option>
@@ -87,7 +87,7 @@ export default function Page() {
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.length > 0 ? (
             products.map((product) => (
-              <Link href={`/product/${product._id}`} key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden">
+              <Link href={`/product/${product._id}`} key={product._id} className="bg-[#fef5eb] rounded-lg shadow-lg overflow-hidden border-4 border-solid border-[#cba783] p-2">
                 <div className="relative w-full h-48">
                   <Image
                     src={product.imageUrl}
