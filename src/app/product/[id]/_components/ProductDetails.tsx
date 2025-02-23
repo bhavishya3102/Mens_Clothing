@@ -18,7 +18,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   stock
 }) => {
   return (
-    <div className="p-6 bg-[#fef5eb] shadow-lg rounded-lg">
+    <div className="p-6 bg-[#ffebd5] shadow-lg rounded-lg">
       <h2 className="text-3xl font-bold text-gray-900 mb-4">Product Details</h2>
       <h1 className="text-2xl font-semibold text-gray-800 mb-4">{name}</h1>
       <p className="text-gray-600 leading-relaxed mb-4">{description}</p>

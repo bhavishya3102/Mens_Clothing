@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const AboutUs = () => {
     return (
-        <div className="max-w-7xl mx-auto p-6 bg-[#fef5eb] shadow-lg rounded-lg ">
+        <div className="max-w-7xl mx-auto p-6 bg-[#ffebd5] shadow-lg rounded-lg ">
             {/* About Us Heading */}
             <h1 className="text-5xl font-extrabold text-center mb-6 text-gray-900">About Us</h1>
 
@@ -16,7 +16,7 @@ const AboutUs = () => {
                     <Image
                         src={backgroundImg}
                         alt="About Us"
-                        className="object-cover h-[80vh] w-full rounded-lg"
+                        className="object-cover object-top h-[80vh] w-full rounded-lg"
                     />
                 </div>
 

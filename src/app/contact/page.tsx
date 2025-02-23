@@ -53,7 +53,7 @@ const ContactUs = () => {
         <Image src={contactImg} alt="Contact" height={500} className="object-cover rounded-lg h-[50vh] w-full" />
       </div>
 
-      <div className="max-w-6xl mx-auto p-6 bg-[#fef5eb] shadow-lg rounded-lg flex flex-col items-center justify-center">
+      <div className="max-w-6xl mx-auto p-6 bg-[#ffebd5] shadow-lg rounded-lg flex flex-col items-center justify-center">
         <h1 className="text-5xl font-extrabold text-center mb-6 text-gray-900">Contact Us</h1>
 
         <div className="bg-white bg-opacity-90 p-8 rounded-lg w-full max-w-2xl">

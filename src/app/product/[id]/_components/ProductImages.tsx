@@ -10,7 +10,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState(images[0]);
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
-      <div className="mb-4 group relative overflow-hidden rounded-lg shadow-lg bg-[#fef5eb]">
+      <div className="mb-4 group relative overflow-hidden rounded-lg shadow-lg bg-[#ffebd5]">
   <Image
     width={250}
     height={200}

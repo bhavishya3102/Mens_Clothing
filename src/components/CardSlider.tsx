@@ -102,7 +102,7 @@ const CardSlider = () => {
                   href={`/product/${product._id}`}
                   className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4"
                 >
-                  <div className="bg-[#fef5eb] rounded-lg shadow-lg overflow-hidden border-4 border-solid border-[#cba783] p-2">
+                  <div className="bg-[#cba783] rounded-lg shadow-lg overflow-hidden border-4 border-solid border-[#cba783] p-2">
                     <div className="relative w-full h-[300px]">
                       <Image
                         src={product.imageUrl}
