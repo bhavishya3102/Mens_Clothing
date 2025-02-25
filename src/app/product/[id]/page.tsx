@@ -63,9 +63,8 @@ const CheckoutPage: React.FC = () => {
 
   if (loading) {
     return <div className="flex justify-center items-center h-64">
-      <Loader className="text-4xl text-gray-500 animate-spin" />
-    </div>
-  }
+    <Loader className="text-4xl text-gray-500 animate-spin" />
+  </div>  } 
 
   if (!product) {
     return <div className="text-center p-10 text-red-500">Product not found.</div>;

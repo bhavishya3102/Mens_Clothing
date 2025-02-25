@@ -4,17 +4,21 @@ import backgroundImg from "../../assets/background.webp"
 import Image from "next/image";
 
 const AboutUs = () => {
-  return (
-    <div className="max-w-7xl mx-auto p-6 bg-gray-100 shadow-lg rounded-lg ">
-      <h1 className="text-5xl font-extrabold text-center mb-6 text-gray-900">About Us</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <div className=" bg-cover bg-center rounded-lg py-5" >
-          <Image
-            src={backgroundImg}
-            alt="About Us"
-            className="object-cover h-[80vh] w-full rounded-lg"
-          />
-        </div>
+    return (
+        <div className="max-w-7xl mx-auto p-6 bg-[#ffebd5] shadow-lg rounded-lg ">
+            {/* About Us Heading */}
+            <h1 className="text-5xl font-extrabold text-center mb-6 text-gray-900">About Us</h1>
+
+            {/* Split Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                {/* Image Section */}
+                <div className=" bg-cover bg-center rounded-lg py-5" >
+                    <Image
+                        src={backgroundImg}
+                        alt="About Us"
+                        className="object-cover object-top h-[80vh] w-full rounded-lg"
+                    />
+                </div>
 
         <div className="bg-white bg-opacity-90 p-8 rounded-lg h-[80vh] py-5">
           <p className="text-xl italic text-center mb-6 text-gray-700">&quot;Style that speaks for you.&quot;</p>

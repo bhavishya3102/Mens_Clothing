@@ -99,7 +99,7 @@ export function InfiniteSlider() {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden bg-gray-50 py-10">
+    <div className="w-full overflow-hidden bg-[#dbc5b0] py-10 border-solid border-[#cba783]">
       <div className="relative w-full">
         <div
           ref={sliderRef}
@@ -110,17 +110,17 @@ export function InfiniteSlider() {
               Array.from({ length: 12 }).map((_, index) => (
                 <div
                   key={index}
-                  className="w-[200px] flex-shrink-0 px-4"
+                  className="w-[230px] flex-shrink-0 px-4"
                 >
-                  <div className="rounded-lg p-3 bg-white shadow animate-pulse">
-                    <div className="w-[180px] h-[120px] bg-gray-300 rounded mx-auto"></div>
+                  <div className="rounded-lg p-2 border-3 border-solid border-[#cba783] bg-white shadow animate-pulse">
+                    <div className="w-[180px] h-[120px] bg-[#cba783] rounded mx-auto"></div>
                   </div>
                 </div>
               ))
             : // Show actual brands when data is loaded
               [...brands, ...brands].map((brand, index) => (
                 <div key={index} className="w-[200px] flex-shrink-0 px-4">
-                  <div className="rounded-lg p-3 bg-white shadow">
+                  <div className="rounded-lg p-3 bg-[#fef5eb] shadow border-3 border-solid border-[#cba783]">
                     <Image
                       src={builder.image(brand.brandImage).url()}
                       alt={`${brand.brandName} logo`}

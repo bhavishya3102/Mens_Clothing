@@ -39,7 +39,7 @@ export function Footer() {
 
 
   return (
-    <footer className="bg-gradient-to-r from-background via-primary/5 to-background text-foreground ">
+    <footer className=" bg-[#b08355] text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>

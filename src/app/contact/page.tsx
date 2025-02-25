@@ -50,7 +50,7 @@ const ContactUs = () => {
         <Image src={contactImg} alt="Contact" height={500} className="object-cover rounded-lg h-[50vh] w-full" />
       </div>
 
-      <div className="max-w-6xl mx-auto p-6 bg-gray-100 shadow-lg rounded-lg flex flex-col items-center justify-center">
+      <div className="max-w-6xl mx-auto p-6 bg-[#ffebd5] shadow-lg rounded-lg flex flex-col items-center justify-center">
         <h1 className="text-5xl font-extrabold text-center mb-6 text-gray-900">Contact Us</h1>
 
         <div className="bg-white bg-opacity-90 p-8 rounded-lg w-full max-w-2xl">
@@ -106,17 +106,27 @@ const ContactUs = () => {
 
         <div className="mt-10 text-center">
           <h3 className="text-2xl font-semibold text-gray-900 mb-4">Contact Information</h3>
-          <ul className="text-gray-700 space-y-2">
-            <li className="flex items-center justify-center gap-2">
-              <FaEnvelope /> Email: support@menselitefashion.com
-            </li>
-            <li className="flex items-center justify-center gap-2">
-              <FaPhone /> Phone: +1 234 567 890
-            </li>
-            <li className="flex items-center justify-center gap-2">
-              <FaMapMarkerAlt /> Address: 123 Fashion Street, New York, USA
-            </li>
-          </ul>
+          <ul className="text-gray-700 space-y-3">
+        <li className="flex items-center gap-3">
+            <FaEnvelope className="text-xl text-gray-800" /> 
+            <span className="font-semibold">Email:</span> varvastra3@gmail.com
+        </li>
+        <li className="flex items-center gap-3">
+            <FaPhone className="text-xl text-gray-800" /> 
+            <span className="font-semibold">Phone:</span> +91-11-4603 8043
+        </li>
+        
+        <li className="flex">
+            <FaMapMarkerAlt className="text-xl text-gray-800 mt-1" /> 
+           
+                <span className="font-semibold">Address:</span>
+                <span className="flex justify-start ml-2">
+                  D-13, Central Market,Lajpat Nagar-2,<br />
+                 Near 24 Seven Store,3C&apos;s Road,<br />
+                 New Delhi - 110024</span>
+            
+        </li>
+    </ul>
           <div className="flex justify-center gap-4 mt-4">
             <a
               href="https://facebook.com/menselitefashion"
