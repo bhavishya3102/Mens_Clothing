@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation"; // For getting the id from URL
+import { useParams } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import ProductImages from "./_components/ProductImages";
 import ProductDetails from "./_components/ProductDetails";
@@ -63,8 +63,9 @@ const CheckoutPage: React.FC = () => {
 
   if (loading) {
     return <div className="flex justify-center items-center h-64">
-    <Loader className="text-4xl text-gray-500 animate-spin" />
-  </div>  }
+      <Loader className="text-4xl text-gray-500 animate-spin" />
+    </div>
+  }
 
   if (!product) {
     return <div className="text-center p-10 text-red-500">Product not found.</div>;
@@ -91,14 +92,12 @@ const CheckoutPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Similar Products Section */}
       <div className="py-8">
         <h2 className="text-center font-bold tracking-wide text-gray-800 text-4xl">
           Similar Products
         </h2>
       </div>
 
-      {/* Card Slider (Placed at the Bottom) */}
       <div className="pb-12">
         <CardSlider />
       </div>

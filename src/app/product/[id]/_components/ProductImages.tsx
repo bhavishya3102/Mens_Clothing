@@ -11,27 +11,23 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       <div className="mb-4 group relative overflow-hidden rounded-lg shadow-lg">
-  <Image
-    width={250}
-    height={200}
-    src={selectedImage}
-    alt="Selected Product"
-    className="w-80 h-96 object-contain rounded-lg transform transition-transform duration-300 ease-in-out group-hover:scale-110"
-    sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 23vw"
+        <Image
+          width={250}
+          height={200}
+          src={selectedImage}
+          alt="Selected Product"
+          className="w-80 h-96 object-contain rounded-lg transform transition-transform duration-300 ease-in-out group-hover:scale-110"
+          sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 23vw"
 
-  />
-
-
-</div>
-
-
+        />
+      </div>
       <div className="flex flex-row items-center justify-center gap-4 mt-4">
         {images.map((image, index) => (
           <div
             key={index}
             className={`cursor-pointer border-2 ${selectedImage === image ? "border-blue-500" : "border-transparent"
               } rounded-lg`}
-            onClick={() => setSelectedImage(image)} // Set the clicked image as the selected image
+            onClick={() => setSelectedImage(image)}
           >
             <Image
               width={150}

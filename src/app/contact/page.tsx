@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaFacebook, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import contactImg from "../../assets/contactus.webp";
 import Image from "next/image";
-import { saveContactInfo } from "@/lib/firebase"; // 🔹 Import Firebase function
+import { saveContactInfo } from "@/lib/firebase";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -15,12 +15,10 @@ const ContactUs = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -48,7 +46,6 @@ const ContactUs = () => {
 
   return (
     <div>
-      {/* Contact Us Heading */}
       <div className="h-96 bg-cover bg-center rounded-lg">
         <Image src={contactImg} alt="Contact" height={500} className="object-cover rounded-lg h-[50vh] w-full" />
       </div>
@@ -59,7 +56,7 @@ const ContactUs = () => {
         <div className="bg-white bg-opacity-90 p-8 rounded-lg w-full max-w-2xl">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">Get In Touch</h2>
           {successMessage && <p className="text-center text-green-600 mb-4">{successMessage}</p>}
-          
+
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -107,7 +104,6 @@ const ContactUs = () => {
           </form>
         </div>
 
-        {/* Contact Info */}
         <div className="mt-10 text-center">
           <h3 className="text-2xl font-semibold text-gray-900 mb-4">Contact Information</h3>
           <ul className="text-gray-700 space-y-2">

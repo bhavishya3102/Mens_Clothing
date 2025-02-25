@@ -32,7 +32,7 @@ export default function Page() {
           discount_price,
           "imageUrl": images[0].asset->url
         }`;
-        
+
         const data = await client.fetch(query, { category });
         console.log("Fetched Data:", data);
         setProducts(data);
@@ -72,7 +72,7 @@ export default function Page() {
                 <div className="p-4">
                   <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
                   <p className="text-gray-600 mt-2">
-                    <span className="line-through text-red-500 mr-2">${product.price}</span> 
+                    <span className="line-through text-red-500 mr-2">${product.price}</span>
                     <span className="font-bold text-green-600">${product.discount_price}</span>
                   </p>
                 </div>
