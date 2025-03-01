@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-
 import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 
 interface ContactData {
@@ -19,7 +18,6 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
@@ -37,24 +35,21 @@ export const saveContactInfo = async (contactData: ContactData) => {
 export const getContacts = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "contacts"));
-    const data = querySnapshot.forEach((doc) =>
-    (
-      {
-        id: doc.id,
-        data: doc.data()
-      }
-    ));
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data()
+    }));
     return {
       success: true,
-      meassage: "Data fetched successfully",
+      message: "Data fetched successfully",
       data: data
-    }
+    };
   }
   catch (error: any) {
     return {
       success: false,
       message: error.message,
       data: null
-    }
+    };
   }
-}
+};
