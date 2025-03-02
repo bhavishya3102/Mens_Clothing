@@ -1,12 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
-
-interface ContactData {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-}
+import { addDoc, getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,11 +13,23 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
+
+interface ContactData {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const auth = getAuth(app);
+
+if (typeof window !== "undefined") {
+  setPersistence(auth, browserLocalPersistence);
+}
 
 export const saveContactInfo = async (contactData: ContactData) => {
   try {
@@ -37,19 +47,18 @@ export const getContacts = async () => {
     const querySnapshot = await getDocs(collection(db, "contacts"));
     const data = querySnapshot.docs.map((doc) => ({
       id: doc.id,
-      data: doc.data()
+      data: doc.data(),
     }));
     return {
       success: true,
       message: "Data fetched successfully",
-      data: data
+      data: data,
     };
-  }
-  catch (error: any) {
+  } catch (error: any) {
     return {
       success: false,
       message: error.message,
-      data: null
+      data: null,
     };
   }
 };

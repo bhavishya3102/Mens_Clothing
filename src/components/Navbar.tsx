@@ -7,6 +7,8 @@ import varvastra from "../assets/varvastra1.png";
 import varvastra2 from "../assets/hindi_varvastra.png";
 import { ChevronDown, Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/useAuth";
+import { auth } from "@/lib/firebase";
 
 interface Category {
   _id: string;
@@ -22,7 +24,13 @@ const Navbar = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const { isAuthenticated } = useAuth();
   const router = useRouter();
+
+  const handleLogout = async () => {
+    await auth.signOut();
+    router.push("/login");
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -47,14 +55,17 @@ const Navbar = () => {
   };
 
   // Mobile click handler
-  const handleMobileCategoryClick = async (e: React.MouseEvent, slug: string) => {
+  const handleMobileCategoryClick = async (
+    e: React.MouseEvent,
+    slug: string,
+  ) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     try {
       // Navigate first
       await router.push(`/category/${slug}`);
-      
+
       // Then close menus after successful navigation
       setTimeout(() => {
         setIsDropdownOpen(false);
@@ -72,19 +83,32 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-2xl font-bold">
-          <div className="flex items-center">
-          <Image src={varvastra} alt="varvastra" width={50} height={50} />
-          <Image src={varvastra2} alt="varvastra2" width={100} height={100} className="mt-3"/>
-          </div>
+              <div className="flex items-center">
+                <Image src={varvastra} alt="varvastra" width={50} height={50} />
+                <Image
+                  src={varvastra2}
+                  alt="varvastra2"
+                  width={100}
+                  height={100}
+                  className="mt-3"
+                />
+              </div>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/aboutus" className="font-semibold">About Us</Link>
-            <Link href="/contact" className="font-semibold">Contact Us</Link>
-            <Link href="/studio" className="font-semibold">Add Products</Link>
-
+            <Link href="/aboutus" className="font-semibold">
+              About Us
+            </Link>
+            <Link href="/contact" className="font-semibold">
+              Contact Us
+            </Link>
+            {isAuthenticated && (
+              <Link href="/studio" className="font-semibold">
+                Add Products
+              </Link>
+            )}
             <input
               type="text"
               value={searchQuery}
@@ -94,32 +118,49 @@ const Navbar = () => {
             />
 
             <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="hover:text-black focus:outline-none font-semibold"
-              >
-                Collections
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="hover:text-black focus:outline-none font-semibold"
+                >
+                  Collections
+                </button>
 
+                {isAuthenticated ? (
+                  <button
+                    onClick={handleLogout}
+                    className="bg-red-500 text-white px-4 py-2 rounded"
+                  >
+                    Logout
+                  </button>
+                ) : null}
+              </div>
               {isDropdownOpen && (
                 <div className="absolute mt-2 w-48 text-black rounded-md shadow-lg z-50 bg-[#f8ecd7]">
                   {loading ? (
                     <div className="flex justify-center items-center p-4">
-                      <Loader className="text-gray-500 animate-spin" size={24} />
+                      <Loader
+                        className="text-gray-500 animate-spin"
+                        size={24}
+                      />
                     </div>
                   ) : categories.length > 0 ? (
                     categories.map((collection) => (
                       <a
                         key={collection._id}
                         href={`/category/${collection.slug}`}
-                        onClick={(e) => handleDesktopCategoryClick(e, collection.slug)}
+                        onClick={(e) =>
+                          handleDesktopCategoryClick(e, collection.slug)
+                        }
                         className="block w-full text-left px-4 py-2 hover:text-black hover:bg-[#efbaba]"
                       >
                         {collection.title}
                       </a>
                     ))
                   ) : (
-                    <p className="text-center py-2 text-gray-500">No categories found</p>
+                    <p className="text-center py-2 text-gray-500">
+                      No categories found
+                    </p>
                   )}
                 </div>
               )}
@@ -164,7 +205,9 @@ const Navbar = () => {
                     <a
                       key={collection._id}
                       href={`/category/${collection.slug}`}
-                      onClick={(e) => handleMobileCategoryClick(e, collection.slug)}
+                      onClick={(e) =>
+                        handleMobileCategoryClick(e, collection.slug)
+                      }
                       className="block w-full text-left px-4 py-2 hover:text-black hover:bg-[#efbaba] cursor-pointer"
                     >
                       {collection.title}
@@ -178,15 +221,30 @@ const Navbar = () => {
               </div>
             )}
 
-            <Link href="/aboutus" className="block py-2 font-semibold" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link
+              href="/aboutus"
+              className="block py-2 font-semibold"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               About Us
             </Link>
-            <Link href="/contact" className="block py-2 font-semibold" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link
+              href="/contact"
+              className="block py-2 font-semibold"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               Contact Us
             </Link>
-            <Link href="/studio" className="block py-2 font-semibold" onClick={() => setIsMobileMenuOpen(false)}>
-              Add Products
-            </Link>
+            {isAuthenticated && (
+              <Link
+                href="/studio"
+                className="block py-2 font-semibold"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Add Products
+              </Link>
+            )}
+            {isAuthenticated ? <button>Logout</button> : null}
           </div>
         </div>
       )}
