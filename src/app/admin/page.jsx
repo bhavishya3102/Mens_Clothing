@@ -75,7 +75,7 @@ const ContactCard = ({ contact }) => {
   };
 
   return (
-    <div className="border border-gray-200 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white overflow-hidden">
+    <div className="border border-gray-200 p-6 bg-[#f8ecd7]rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white overflow-hidden">
       <div className="flex justify-between items-start mb-4">
         <h2 className="text-xl font-semibold text-gray-800">
           {contact.data.name}

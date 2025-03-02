@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar"
 import { Footer } from "@/components/ui/footer";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,12 +15,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="hydrated">
+    <html lang="en" suppressHydrationWarning className="hydrated">
      <body className="antialiased w-full bg-[#f8e2c8]">
-
+     <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
         <Navbar />
         {children}
         <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

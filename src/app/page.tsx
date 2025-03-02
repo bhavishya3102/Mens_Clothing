@@ -3,6 +3,7 @@ import { BackgroundBoxesDemo } from "@/components/BackgroundBoxesDemo";
 import CardSlider from "@/components/CardSlider";
 import Carousel from "@/components/Carousal";
 import { InfiniteSlider } from "@/components/Infinite-Slider";
+import SpecialOffers from "@/components/SpecialOffers";
 // import ReturnPolicy from "@/components/ReturnPolicy";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 
@@ -11,8 +12,9 @@ export default function Home() {
   return (
     <div >
       <Carousel />
+      <SpecialOffers/>
       <div className="py-6">
-        <h2 className="text-center font-extrabold  tracking-wide text-gray-800 text-4xl">Feature Articles</h2>
+        <h2 className="text-center font-extrabold  tracking-wide text-gray-800 text-4xl my-3">Feature Articles</h2>
       </div>
       <CardSlider />
       <div className="py-6">
