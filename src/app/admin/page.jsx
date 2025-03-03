@@ -50,10 +50,10 @@ export default function AdminPage() {
     <div className="mx-auto py-6 px-8">
       <header className="mb-8">
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-800">
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
             Contact Submissions
           </h1>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 dark:text-white">
             Total: {contactsData.length} submissions
           </div>
         </div>
@@ -75,7 +75,7 @@ const ContactCard = ({ contact }) => {
   };
 
   return (
-    <div className="border border-gray-200 p-6 bg-[#f8ecd7]rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white overflow-hidden">
+    <div className="border border-gray-200 p-6  bg-[#fef5eb]  rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white overflow-hidden">
       <div className="flex justify-between items-start mb-4">
         <h2 className="text-xl font-semibold text-gray-800">
           {contact.data.name}

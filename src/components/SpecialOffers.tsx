@@ -37,7 +37,7 @@ const SpecialOffers = async () => {
         {/* Offers Grid */}
         <div className="w-[85%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {products.map((offer: SpecialOffer) => (
-            <Card key={offer._id} className="bg-[#f8ecd7] shadow-xl rounded-xl overflow-hidden border border-[#a07436] relative">
+            <Card key={offer._id} className="dark:bg-[#8d7141] bg-[#f8ecd7] shadow-xl rounded-xl overflow-hidden border border-[#a07436] relative">
               {/* Sticker Tag */}
               <div className="absolute top-3 left-3 bg-yellow-300 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
                 <Star className="w-4 h-4" />

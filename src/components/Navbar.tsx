@@ -37,12 +37,19 @@ const Navbar = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const { isAuthenticated } = useAuth();
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
+
+  // Add mounted state to handle client-side rendering
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLogout = async () => {
     await auth.signOut();
     router.push("/login");
   };
-  const { theme,setTheme } = useTheme()
 
   useEffect(() => {
     async function fetchData() {
@@ -88,9 +95,14 @@ const Navbar = () => {
     }
   };
 
+  // Early return for server-side rendering
+  if (!mounted) {
+    return null; // or return a loading state/skeleton
+  }
+
   return (
-    <nav className={` bg-[#b08355] sticky top-0 left-0 right-0 z-[1000] text-black shadow-md ${theme === "dark" ? "bg-black" : ""}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className={` ${theme =="dark"?"bg-[#674019]":"bg-[#b08355]"} sticky top-0 left-0 right-0 z-[1000] text-black shadow-md`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px  -8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -180,8 +192,8 @@ const Navbar = () => {
             <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 dark:text-white" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 dark:text-white" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>

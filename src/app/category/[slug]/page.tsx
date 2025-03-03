@@ -107,7 +107,7 @@ export default function Page() {
               </Link>
             ))
           ) : (
-            <p className="text-center col-span-4 text-gray-500">No products found in this category.</p>
+            <p className="text-center col-span-4 text-gray-500 dark:text-white">No products found in this category.</p>
           )}
         </section>
       )}

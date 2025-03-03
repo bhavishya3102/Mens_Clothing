@@ -25,9 +25,9 @@ interface Category {
 export function Footer() {
   const [categories, setCategories] = useState<Category[]>([]);
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData() {  
       try {
-        const data = await getCategories();
+        const data = await getCategories(); 
         setCategories(data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -39,7 +39,7 @@ export function Footer() {
 
 
   return (
-    <footer className=" bg-[#b08355] text-white">
+    <footer className=" dark:bg-[#674019] bg-[#b08355] text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
@@ -47,10 +47,10 @@ export function Footer() {
             <ul className="space-y-2">
               {categories.map((category) => (
                 <li key={category._id}>
-                  <Link href={`/categories/${category.slug}`} className="hover:underline">
+                  <Link href={`/category/${category.slug}`} className="hover:underline">
                     {category.title}
                   </Link>
-                </li>
+                </li> 
               ))}
             </ul>
           </div>

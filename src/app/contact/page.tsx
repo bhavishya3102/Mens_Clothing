@@ -53,7 +53,7 @@ const ContactUs = () => {
       <div className="max-w-6xl mx-auto p-6 bg-[#ffebd5] shadow-lg rounded-lg flex flex-col items-center justify-center">
         <h1 className="text-5xl font-extrabold text-center mb-6 text-gray-900">Contact Us</h1>
 
-        <div className="bg-white bg-opacity-90 p-8 rounded-lg w-full max-w-2xl">
+        <div className="bg-white dark:bg-[#7a5d3d] bg-opacity-90 p-8 rounded-lg w-full max-w-2xl">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">Get In Touch</h2>
           {successMessage && <p className="text-center text-green-600 mb-4">{successMessage}</p>}
 
@@ -64,7 +64,7 @@ const ContactUs = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Your Name"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full p-3 border border-gray-300  dark:bg-white rounded-lg focus:outline-none focus:border-blue-500"
               required
             />
             <input
@@ -73,7 +73,7 @@ const ContactUs = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Your Email"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full p-3 border border-gray-300 dark:bg-white rounded-lg focus:outline-none focus:border-blue-500"
               required
             />
             <input
@@ -82,7 +82,7 @@ const ContactUs = () => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Phone Number"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full p-3 border border-gray-300 dark:bg-white rounded-lg focus:outline-none focus:border-blue-500"
               required
             />
             <textarea
@@ -91,7 +91,7 @@ const ContactUs = () => {
               onChange={handleChange}
               placeholder="Your Message"
               rows={4}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full p-3 border border-gray-300 dark:bg-white rounded-lg focus:outline-none focus:border-blue-500"
               required
             ></textarea>
             <button

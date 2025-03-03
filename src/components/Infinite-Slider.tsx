@@ -99,7 +99,7 @@ export function InfiniteSlider() {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden bg-[#dbc5b0] py-10 border-solid border-[#cba783]">
+    <div className="w-full overflow-hidden dark:bg-[#7a5d3d] bg-[#dbc5b0] py-10 border-solid border-[#cba783]">
       <div className="relative w-full">
         <div
           ref={sliderRef}
