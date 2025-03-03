@@ -1,6 +1,6 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
-import backgroundImg from "../../assets/background.webp"
+import backgroundImg from "../../assets/background.jpg"
 import Image from "next/image";
 
 const AboutUs = () => {
