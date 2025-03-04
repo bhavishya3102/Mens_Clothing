@@ -308,7 +308,7 @@ const Navbar = () => {
                 Add Products
               </Link>
             )}
-            {isAuthenticated ? <button>Logout</button> : null}
+            {isAuthenticated ? <button onClick={handleLogout} className="block py-2 font-semibold">Logout</button> : null}
           </div>
         </div>
       )}
