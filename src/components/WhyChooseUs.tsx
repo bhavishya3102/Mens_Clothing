@@ -1,7 +1,7 @@
 import Image from "next/image";
-import trust from "../assets/trust.webp"
-import luxury from "../assets/luxary.webp"
-import timeless from "../assets/timeless.webp"
+import trust from "../assets/sherwani.jpg"
+import luxury from "../assets/sherwani2.jpg"
+import timeless from "../assets/sherwani3.jpg"
 
 export const WhyChooseUs = () => {
 
