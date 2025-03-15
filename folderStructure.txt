@@ -1,0 +1,117 @@
+|─ .gitignore
+├── README.md
+├── components.json
+├── eslint.config.mjs
+├── middleware.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.mjs
+├── public
+    ├── file.svg
+    ├── globe.svg
+    ├── next.svg
+    ├── pic1.jpg
+    ├── pic2.jpg
+    ├── pic3.jpg
+    ├── vercel.svg
+    └── window.svg
+├── sanity.cli.ts
+├── sanity.config.ts
+├── src
+    ├── app
+    │   ├── aboutus
+    │   │   └── page.tsx
+    │   ├── admin
+    │   │   └── page.jsx
+    │   ├── category
+    │   │   └── [slug]
+    │   │   │   └── page.tsx
+    │   ├── contact
+    │   │   └── page.tsx
+    │   ├── favicon.ico
+    │   ├── globals.css
+    │   ├── layout.tsx
+    │   ├── login
+    │   │   └── page.tsx
+    │   ├── page.tsx
+    │   ├── product
+    │   │   └── [id]
+    │   │   │   ├── _components
+    │   │   │       ├── ProductDetails.tsx
+    │   │   │       └── ProductImages.tsx
+    │   │   │   └── page.tsx
+    │   ├── products
+    │   │   ├── loading.tsx
+    │   │   └── page.tsx
+    │   └── studio
+    │   │   └── [[...tool]]
+    │   │       └── page.tsx
+    ├── assets
+    │   ├── adidas.png
+    │   ├── background.jpg
+    │   ├── burberry.jpeg
+    │   ├── calvin.png
+    │   ├── chanel.png
+    │   ├── contactus.webp
+    │   ├── hindi_varvastra.png
+    │   ├── hollister.png
+    │   ├── image2.jpg
+    │   ├── image3.jpg
+    │   ├── image4.jpg
+    │   ├── kurta.jpg
+    │   ├── lolovivi.png
+    │   ├── mark.png
+    │   ├── puma.png
+    │   ├── sherwani.jpg
+    │   ├── sherwani2.jpg
+    │   ├── sherwani3.jpg
+    │   ├── varvastra1.png
+    │   └── zara.png
+    ├── components
+    │   ├── AnimatedTestimonialsDemo.tsx
+    │   ├── BackgroundBoxesDemo.tsx
+    │   ├── CardSlider.tsx
+    │   ├── Carousal.tsx
+    │   ├── ClientCarousel.tsx
+    │   ├── Infinite-Slider.tsx
+    │   ├── Navbar.tsx
+    │   ├── ReturnPolicy.tsx
+    │   ├── SpecialOffers.tsx
+    │   ├── WhyChooseUs.tsx
+    │   ├── theme-provider.tsx
+    │   └── ui
+    │   │   ├── animated-testimonials.tsx
+    │   │   ├── background-boxes.tsx
+    │   │   ├── button.tsx
+    │   │   ├── card.tsx
+    │   │   ├── dropdown-menu.tsx
+    │   │   ├── footer.tsx
+    │   │   └── skeleton.tsx
+    ├── lib
+    │   ├── auth-action.ts
+    │   ├── contacts-action.ts
+    │   ├── fetchBrands.ts
+    │   ├── fetchCategories.ts
+    │   ├── firebase.ts
+    │   ├── useAuth.js
+    │   └── utils.ts
+    └── sanity
+    │   ├── env.ts
+    │   ├── lib
+    │       ├── client.ts
+    │       ├── image.ts
+    │       └── live.ts
+    │   ├── schemaTypes
+    │       ├── banner.ts
+    │       ├── blockContentType.ts
+    │       ├── brand.ts
+    │       ├── categoryType.ts
+    │       ├── index.ts
+    │       ├── productType.ts
+    │       ├── specialoffers.ts
+    │       └── trendingItemType.ts
+    │   └── structure.ts
+├── tailwind.config.ts
+└── tsconfig.json

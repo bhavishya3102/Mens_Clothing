@@ -151,14 +151,14 @@ const Navbar = () => {
                   alt="varvastra2"
                   width={100}
                   height={100}
-                  className="mt-3"
+                  className="mt-3 dark:text-white"
                 />
               </div>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-6 dark:text-white">
             <Link href="/aboutus" className="font-semibold">
               About Us
             </Link>

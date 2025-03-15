@@ -54,7 +54,7 @@ const ContactUs = () => {
         <h1 className="text-5xl font-extrabold text-center mb-6 text-gray-900">Contact Us</h1>
 
         <div className="bg-white dark:bg-[#7a5d3d] bg-opacity-90 p-8 rounded-lg w-full max-w-2xl">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">Get In Touch</h2>
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-4 dark:text-white">Get In Touch</h2>
           {successMessage && <p className="text-center text-green-600 mb-4">{successMessage}</p>}
 
           <form className="space-y-4" onSubmit={handleSubmit}>

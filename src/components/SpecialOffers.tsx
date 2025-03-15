@@ -30,7 +30,7 @@ const SpecialOffers = async () => {
  return (
     <section className="bg-[#cba783] py-12">
       <div className="container mx-auto text-center">
-        <h1 className="text-center font-extrabold  tracking-wide text-gray-800 text-4xl">🎉 Exclusive Offers 🎉</h1>
+        <h1 className="text-center font-extrabold  tracking-wide text-gray-800 text-4xl dark:text-white">🎉 Exclusive Offers 🎉</h1>
 
         <p className="text-lg text-gray-700 mb-10">Shop the best deals on traditional wear</p>
 
@@ -48,7 +48,7 @@ const SpecialOffers = async () => {
 
               {/* Offer Details */}
               <CardContent className="p-6 text-center mt-3">
-                <h2 className="text-xl font-bold text-gray-900">{offer.title}</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white">{offer.title}</h2>
                 <p className="text-lg text-gray-700 mt-2">
                   Starting at <span className="text-red-600 font-bold">₹{offer.price}</span>
                 </p>
