@@ -256,7 +256,33 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-1">
+          <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => handleSearch(e.target.value)}
+                placeholder="Search here..."
+                className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1c1ff] text-black dark:text-white"
+              />
+              {showResults && searchResults.length > 0 && (
+                <div className="absolute mt-2 w-full bg-white rounded-md shadow-lg z-50">
+                  {searchResults.map((product) => (
+                    <Link
+                      key={product._id}
+                      href={`/product/${product._id}`}
+                      className="block px-4 py-2 hover:bg-gray-100 text-black"
+                      onClick={() => {
+                        setShowResults(false);
+                        setSearchQuery('');
+                      }}
+                    >
+                      {product.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             <button
               className="hover:text-black focus:outline-none mr-4"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -265,23 +291,13 @@ const Navbar = () => {
             </button>
             <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 dark:text-white" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 dark:text-white" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")} className="z-50">
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")} className="z-50">
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")} className="z-50">
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
+     
     </DropdownMenu>
           </div>
         </div>
@@ -293,6 +309,8 @@ const Navbar = () => {
           ref={mobileMenuRef}
           className="md:hidden bg-[#f8ecd7] shadow-lg border-t border-gray-300 absolute w-full z-20"
         >
+          
+
           <div className="p-4 space-y-4">
             <div
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -301,6 +319,8 @@ const Navbar = () => {
               Collections
               <ChevronDown />
             </div>
+
+            
 
             {isDropdownOpen && (
               <div className="mt-2 w-full text-black rounded-md shadow-lg z-50 bg-[#f8ecd7]">
@@ -336,6 +356,7 @@ const Navbar = () => {
             >
               About Us
             </Link>
+            
             <Link
               href="/contact"
               className="block py-2 font-semibold"
