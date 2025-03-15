@@ -258,33 +258,8 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-1">
-          <div className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-                placeholder="Search here..."
-                className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1c1ff] text-black dark:text-white"
-              />
-              {showResults && searchResults.length > 0 && (
-                <div className="absolute mt-2 w-full bg-white rounded-md shadow-lg z-50">
-                  {searchResults.map((product) => (
-                    <Link
-                      key={product._id}
-                      href={`/product/${product._id}`}
-                      className="block px-4 py-2 hover:bg-gray-100 text-black"
-                      onClick={() => {
-                        setShowResults(false);
-                        setSearchQuery('');
-                      }}
-                    >
-                      {product.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+          <div className="md:hidden ">
+          
             <button
               className="hover:text-black focus:outline-none mr-4"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -314,6 +289,32 @@ const Navbar = () => {
           
 
           <div className="p-4 space-y-4">
+          <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => handleSearch(e.target.value)}
+                placeholder="Search here..."
+                className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1c1ff] text-black dark:text-white"
+              />
+              {showResults && searchResults.length > 0 && (
+                <div className="absolute mt-2 w-full bg-white rounded-md shadow-lg z-50">
+                  {searchResults.map((product) => (
+                    <Link
+                      key={product._id}
+                      href={`/product/${product._id}`}
+                      className="block px-4 py-2 hover:bg-gray-100 text-black"
+                      onClick={() => {
+                        setShowResults(false);
+                        setSearchQuery('');
+                      }}
+                    >
+                      {product.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             <div
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="w-full text-left font-semibold flex items-center justify-between cursor-pointer"
@@ -350,6 +351,7 @@ const Navbar = () => {
                 )}
               </div>
             )}
+            
 
             <Link
               href="/aboutus"
