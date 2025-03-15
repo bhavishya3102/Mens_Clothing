@@ -5,6 +5,7 @@ import { getCategories } from "@/lib/fetchCategories";
 import Image from "next/image";
 import varvastra from "../assets/varvastra1.png";
 import varvastra2 from "../assets/hindi_varvastra.png";
+import varvastra3 from "../assets/varvastra_white.png";
 import { ChevronDown, Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/useAuth";
@@ -147,7 +148,7 @@ const Navbar = () => {
               <div className="flex items-center">
                 <Image src={varvastra} alt="varvastra" width={50} height={50} />
                 <Image
-                  src={varvastra2}
+                  src={theme === "dark" ? varvastra3 : varvastra2}
                   alt="varvastra2"
                   width={100}
                   height={100}
