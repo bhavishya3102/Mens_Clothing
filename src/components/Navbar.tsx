@@ -9,6 +9,8 @@ import { ChevronDown, Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/useAuth";
 import { auth } from "@/lib/firebase";
+import { toast } from "react-hot-toast";
+
  
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -55,6 +57,8 @@ const Navbar = () => {
   const handleLogout = async () => {
     await auth.signOut();
     router.push("/login");
+    toast.success("Logged out successfully");
+
   };
 
 

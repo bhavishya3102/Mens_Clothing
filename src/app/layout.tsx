@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar"
 import { Footer } from "@/components/ui/footer";
+import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
         {children}
         <Footer />
         </ThemeProvider>
+        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
   );
