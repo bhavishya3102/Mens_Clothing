@@ -20,11 +20,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { client } from "@/sanity/lib/client";
 
 interface Category {
   _id: string;
   slug: string;
   title: string;
+}
+
+interface Product {
+  _id: string;
+  name: string;
 }
 
 const Navbar = () => {
@@ -37,7 +43,9 @@ const Navbar = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme ,resolvedTheme } = useTheme();
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [showResults, setShowResults] = useState(false);
 
   // Add mounted state to handle client-side rendering
   const [mounted, setMounted] = useState(false);
@@ -50,6 +58,10 @@ const Navbar = () => {
     await auth.signOut();
     router.push("/login");
   };
+
+
+
+    
 
   useEffect(() => {
     async function fetchData() {
@@ -95,6 +107,29 @@ const Navbar = () => {
     }
   };
 
+  const handleSearch = async (query: string) => {
+    setSearchQuery(query);
+    if (query.trim().length > 0) {
+      setLoading(true);
+      try {
+        const searchQuery = `*[_type == "product" && name match "*${query}*"]{
+          _id,
+          name,
+        }`;
+        const results = await client.fetch(searchQuery);
+        setSearchResults(results);
+        setShowResults(true);
+      } catch (error) {
+        console.error("Error searching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setSearchResults([]);
+      setShowResults(false);
+    }
+  };
+
   // Early return for server-side rendering
   if (!mounted) {
     return null; // or return a loading state/skeleton
@@ -133,13 +168,32 @@ const Navbar = () => {
                 Add Products
               </Link>
             )}
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search here..."
-              className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1c1ff] text-black"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => handleSearch(e.target.value)}
+                placeholder="Search here..."
+                className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1c1ff] text-black dark:text-white"
+              />
+              {showResults && searchResults.length > 0 && (
+                <div className="absolute mt-2 w-full bg-white rounded-md shadow-lg z-50">
+                  {searchResults.map((product) => (
+                    <Link
+                      key={product._id}
+                      href={`/product/${product._id}`}
+                      className="block px-4 py-2 hover:bg-gray-100 text-black"
+                      onClick={() => {
+                        setShowResults(false);
+                        setSearchQuery('');
+                      }}
+                    >
+                      {product.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <div className="relative" ref={dropdownRef}>
               <div className="flex gap-2">
@@ -191,23 +245,13 @@ const Navbar = () => {
             </div>
             <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 dark:text-white" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 dark:text-white" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
+     
     </DropdownMenu>
           </div>
 

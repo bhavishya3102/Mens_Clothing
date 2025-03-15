@@ -33,7 +33,7 @@ export default function Page() {
           discount_price,
           "imageUrl": images[0].asset->url
         }`;
-        
+
         const data = await client.fetch(query);
         console.log("Fetched Data:", data);
         setProducts(data);
@@ -67,7 +67,7 @@ export default function Page() {
 
       {/* Sort Dropdown */}
       <div className="flex justify-end mb-20 mt-0">
-        <select 
+        <select
           value={sortOrder}
           onChange={(e) => handleSortChange(e.target.value)}
           className=" p-2 rounded-md text-gray-700 bg-[#f8ecd7] border-4 border-solid border-[#a07436] "
@@ -87,7 +87,11 @@ export default function Page() {
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.length > 0 ? (
             products.map((product) => (
-              <Link href={`/product/${product._id}`} key={product._id} className="bg-[#fef5eb] rounded-lg shadow-lg overflow-hidden border-4 border-solid border-[#cba783] p-2">
+              <Link
+                href={`/product/${product._id}`}
+                key={product._id}
+                className="bg-[#fef5eb] rounded-lg shadow-lg overflow-hidden border-4 border-solid border-[#cba783] p-2"
+              >
                 <div className="relative w-full h-48">
                   <Image
                     src={product.imageUrl}
@@ -100,14 +104,20 @@ export default function Page() {
                 <div className="p-4">
                   <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
                   <p className="text-gray-600 mt-2">
-                    <span className="line-through text-red-500 mr-2">${product.price}</span>
-                    <span className="font-bold text-green-600">${product.discount_price}</span>
+                    <span className="line-through text-red-500 mr-2">
+                      ${product.price}
+                    </span>
+                    <span className="font-bold text-green-600">
+                      ${product.discount_price}
+                    </span>
                   </p>
                 </div>
               </Link>
             ))
           ) : (
-            <p className="text-center col-span-4 text-gray-500 dark:text-white">No products found in this category.</p>
+            <p className="text-center col-span-4 text-gray-500 dark:text-white">
+              No products found in this category.
+            </p>
           )}
         </section>
       )}
