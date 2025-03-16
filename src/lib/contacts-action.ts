@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
 
 interface ContactData {
   name: string;
@@ -40,3 +40,14 @@ export const getContacts = async () => {
     };
   }
 };
+
+export const deleteContact = async (id: string) => {
+  try {
+    await deleteDoc(doc(db, "contacts", id));
+    console.log("Contact deleted successfully");
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+

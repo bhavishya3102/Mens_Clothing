@@ -88,7 +88,7 @@ export function Footer() {
             <p className="mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col space-y-2">
              
-              <Button type="submit" variant="outline" className='bg-primary text-white hover:bg-cyan-800 hover:text-white'>
+              <Button type="submit" variant="outline" className='bg-primary text-black bg-white ' >
                 Subscribe
               </Button>
             </form>

@@ -167,10 +167,16 @@ const Navbar = () => {
               Contact Us
             </Link>
             {isAuthenticated && (
+              <Link href="/admin" className="font-semibold">
+                Admin
+              </Link>
+            )}
+            {isAuthenticated && (
               <Link href="/studio" className="font-semibold">
                 Add Products
               </Link>
             )}
+
             <div className="relative">
               <input
                 type="text"

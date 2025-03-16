@@ -1,15 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { TrashIcon, MailIcon } from "lucide-react";
-import { getContacts } from "@/lib/contacts-action";
+import { TrashIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { deleteContact, getContacts } from "@/lib/contacts-action";
 import { useAuth } from "@/lib/useAuth";
+import toast from "react-hot-toast";
 
 export default function AdminPage() {
   const { user, loading: authLoading, isAuthenticated } = useAuth(true);
   const [contactsData, setContactsData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(7);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -46,6 +49,13 @@ export default function AdminPage() {
     return <Empty />;
   }
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = contactsData.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil((contactsData.length || 0) / itemsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="mx-auto py-6 px-8">
       <header className="mb-8">
@@ -60,66 +70,73 @@ export default function AdminPage() {
         <div className="h-1 w-20 bg-blue-500 mt-2"></div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {contactsData.map((contact) => (
-          <ContactCard key={contact.id} contact={contact} />
-        ))}
+      <div className="overflow-x-auto max-w-[80vw] mx-auto">
+        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg text-lg">
+          <thead className="bg-[#b08355] font-bold">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs text-black font-bold uppercase tracking-wider">Name</th>
+              <th className="px-6 py-3 text-left text-xs text-black font-bold uppercase tracking-wider">Email</th>
+              <th className="px-6 py-3 text-left text-xs text-black font-bold uppercase tracking-wider">Phone</th>
+              <th className="px-6 py-3 text-left text-xs text-black font-bold  uppercase tracking-wider">Message</th>
+              <th className="px-6 py-3 text-right text-xs  text-black font-bold uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {currentItems.map((contact) => (
+              <tr key={contact.id} className="hover:bg-gray-50">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">{contact.data.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{contact.data.email}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{contact.data.phone || "Not provided"}</td>
+                <td className="px-6 py-4 text-sm text-gray-700">
+                  <div className="max-w-xs overflow-hidden text-ellipsis">
+                    {contact.data.message}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <button
+                    onClick={() => handleDelete(contact.id, setContactsData, contactsData)}
+                    className="text-red-600 hover:text-red-900"
+                  >
+                    <TrashIcon size={18} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+
+        <div className="flex mx-auto justify-center gap-4 my-4 items-center w-full">
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
+          >
+            <ChevronLeftIcon size={16} />
+            Previous
+          </button>
+          
+          <span className="text-sm text-gray-700 dark:text-white">
+            Page {currentPage} of {totalPages}
+          </span>
+
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
+          >
+            Next
+            <ChevronRightIcon size={16} />
+          </button>
+        </div>
     </div>
   );
 }
 
-const ContactCard = ({ contact }) => {
-  const handleDelete = () => {
-    console.log("Delete contact:", contact.id);
-  };
-
-  return (
-    <div className="border border-gray-200 p-6  bg-[#fef5eb]  rounded-lg shadow-sm hover:shadow-md transition-shadow bg-white overflow-hidden">
-      <div className="flex justify-between items-start mb-4">
-        <h2 className="text-xl font-semibold text-gray-800">
-          {contact.data.name}
-        </h2>
-      </div>
-
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <div>
-          <p className="text-xs font-medium uppercase text-gray-500 mb-1">
-            Email
-          </p>
-          <p className="text-gray-700 truncate">{contact.data.email}</p>
-        </div>
-        <div>
-          <p className="text-xs font-medium uppercase text-gray-500 mb-1">
-            Phone
-          </p>
-          <p className="text-gray-700">
-            {contact.data.phone || "Not provided"}
-          </p>
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <p className="text-xs font-medium uppercase text-gray-500 mb-1">
-          Message
-        </p>
-        <div className="p-3 bg-gray-50 rounded border border-gray-100 max-h-36 overflow-y-auto">
-          <p className="text-gray-700 whitespace-pre-line">
-            {contact.data.message}
-          </p>
-        </div>
-      </div>
-      <div className="flex justify-end">
-        <button
-          className="p-2 rounded-full hover:bg-red-50 text-gray-500 hover:text-red-600 transition-colors"
-          title="Delete contact"
-          onClick={handleDelete}
-        >
-          <TrashIcon size={18} />
-        </button>
-      </div>
-    </div>
-  );
+const handleDelete = async (contactId, setContactsData, contactsData) => {
+  await deleteContact(contactId);
+  setContactsData(contactsData.filter((cont) => cont.id !== contactId));
+  toast.success("Contact deleted successfully");
 };
 
 const Loading = () => {
