@@ -49,8 +49,8 @@ const SpecialOffers = async () => {
               {/* Offer Details */}
               <CardContent className="p-6 text-center mt-3">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">{offer.title}</h2>
-                <p className="text-lg text-gray-700 mt-2">
-                  Starting at <span className="text-red-600 font-bold">₹{offer.price}</span>
+                <p className="text-lg text-gray-700 mt-2 dark:text-white font-bold">
+                  Starting at <span className="text-red-600 dark:text-white font-bold">₹{offer.price}</span>
                 </p>
                 <Button className="mt-4 bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition">
                   🛍️ Grab Now
