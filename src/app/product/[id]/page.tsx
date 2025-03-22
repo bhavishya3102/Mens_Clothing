@@ -8,7 +8,7 @@ import ProductDetails from "./_components/ProductDetails";
 import CardSlider from "@/components/CardSlider";
 import { Loader } from "lucide-react";
 
-interface Product {
+interface ProductDetails {
   _id: string;
   name: string;
   images: {
@@ -21,14 +21,22 @@ interface Product {
   price: number;
   discount_price: number;
   stock_quantity: number;
-  category: string;
+  category: {
+    _ref: string;
+  };
+}
+
+interface Product {
+  _id: string;
+  name: string;
+  imageUrl: string;
 }
 
 const CheckoutPage: React.FC = () => {
   const params = useParams();
   const productId = params.id;
 
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<ProductDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [productsbycategory, setProductsbycategory] = useState<Product[]>([]);
 
@@ -50,7 +58,9 @@ const CheckoutPage: React.FC = () => {
           price,
           discount_price,
           stock_quantity,
-          category
+          'category': category->{
+            _ref
+          }
         }`;
         const data = await client.fetch(query, { id: productId });
         setProduct(data);
@@ -72,7 +82,7 @@ const CheckoutPage: React.FC = () => {
     const fetchProductsbyCategory = async () => {
       setLoading(true);
       try {
-        const query = `*[_type == "product" && category->_id  == "${product?.category?._ref}"]{
+        const query = `*[_type == "product" && category->_id  == $categoryId]{
           _id,
           name,
           price,
@@ -80,7 +90,7 @@ const CheckoutPage: React.FC = () => {
           "imageUrl": images[0].asset->url
         }`;
 
-        const data = await client.fetch(query);
+        const data = await client.fetch(query, { categoryId: product?.category?._ref });
         //now filter all the products except the current product
         const filteredProducts = data.filter((product: Product) => product._id !== productId);
         setProductsbycategory(filteredProducts);
@@ -93,7 +103,7 @@ const CheckoutPage: React.FC = () => {
     };
 
     fetchProductsbyCategory();
-  }, [product?.category]); 
+  }, [product?.category?._ref, productId]);
 
 
 
