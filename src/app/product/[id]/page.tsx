@@ -21,6 +21,7 @@ interface Product {
   price: number;
   discount_price: number;
   stock_quantity: number;
+  category: string;
 }
 
 const CheckoutPage: React.FC = () => {
@@ -29,6 +30,7 @@ const CheckoutPage: React.FC = () => {
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [productsbycategory, setProductsbycategory] = useState<Product[]>([]);
 
   useEffect(() => {
     if (!productId) return;
@@ -47,7 +49,8 @@ const CheckoutPage: React.FC = () => {
           size,
           price,
           discount_price,
-          stock_quantity
+          stock_quantity,
+          category
         }`;
         const data = await client.fetch(query, { id: productId });
         setProduct(data);
@@ -61,10 +64,49 @@ const CheckoutPage: React.FC = () => {
     fetchProduct();
   }, [productId]);
 
+  console.log("product", product?.category?._ref);
+
+
+  // now fetch all the products acording to the product category
+  useEffect(() => {
+    const fetchProductsbyCategory = async () => {
+      setLoading(true);
+      try {
+        const query = `*[_type == "product" && category->_id  == "${product?.category?._ref}"]{
+          _id,
+          name,
+          price,
+          discount_price,
+          "imageUrl": images[0].asset->url
+        }`;
+
+        const data = await client.fetch(query);
+        //now filter all the products except the current product
+        const filteredProducts = data.filter((product: Product) => product._id !== productId);
+        setProductsbycategory(filteredProducts);
+        console.log("Fetched Data:", filteredProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductsbyCategory();
+  }, [product?.category]); 
+
+
+
+
+  console.log("product", product);
+
   if (loading) {
-    return <div className="flex justify-center items-center h-64">
-    <Loader className="text-4xl text-gray-500 animate-spin" />
-  </div>  } 
+    return (
+      <div className="flex justify-center items-center h-64">
+        <Loader className="text-4xl text-gray-500 animate-spin" />
+      </div>
+    );
+  }
 
   if (!product) {
     return <div className="text-center p-10 text-red-500">Product not found.</div>;
@@ -98,7 +140,7 @@ const CheckoutPage: React.FC = () => {
       </div>
 
       <div className="pb-12">
-        <CardSlider />
+        <CardSlider products={productsbycategory} loading={loading} />
       </div>
     </div>
   );

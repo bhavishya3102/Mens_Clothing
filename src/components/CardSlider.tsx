@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft} from "lucide-react";
 import Link from "next/link";
-import { client } from "../sanity/lib/client"; // Import Sanity client
 
 interface Product {
   _id: string;
@@ -11,32 +10,11 @@ interface Product {
   imageUrl: string;
 }
 
-const CardSlider = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+const CardSlider = ({products, loading}: {products: Product[], loading: boolean}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(4);
-  const [loading, setLoading] = useState(true); // Track loading state
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      try {
-        const query = `*[_type == "product"]{
-          _id,
-          name,
-          "imageUrl": images[0].asset->url
-        }`;
-        const data = await client.fetch(query);
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+ 
 
   useEffect(() => {
     const updateSlidesPerView = () => {

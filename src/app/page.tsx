@@ -1,6 +1,6 @@
+import AllProductsSlider from "@/components/AllProductsSlider";
 import { AnimatedTestimonialsDemo } from "@/components/AnimatedTestimonialsDemo";
 import { BackgroundBoxesDemo } from "@/components/BackgroundBoxesDemo";
-import CardSlider from "@/components/CardSlider";
 import Carousel from "@/components/Carousal";
 import { InfiniteSlider } from "@/components/Infinite-Slider";
 import SpecialOffers from "@/components/SpecialOffers";
@@ -16,7 +16,7 @@ export default function Home() {
       <div className="py-6">
         <h2 className="text-center font-extrabold  tracking-wide text-gray-800 text-4xl my-3 dark:text-white">Feature Articles</h2>
       </div>
-      <CardSlider />
+      <AllProductsSlider />
       <div className="py-6">
         <h2 className="text-center font-extrabold  tracking-wide text-gray-800 text-4xl dark:text-white">Our Top Brands</h2>
       </div>
