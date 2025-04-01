@@ -60,11 +60,7 @@ const Navbar = () => {
     router.push("/login");
     toast.success("Logged out successfully");
 
-  };
-
-
-
-    
+  };    
 
   useEffect(() => {
     async function fetchData() {
