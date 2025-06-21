@@ -36,8 +36,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
       </div>
 
       <div className="flex flex-wrap gap-6 items-center text-gray-900">
-        <span className="text-xl font-semibold">Price: <span className="text-gray-800 font-bold">Rs {price}</span></span>
-        <span className="text-xl font-semibold">Discount Price: <span className="text-green-600 font-bold">Rs {discountPrice}</span></span>
+        <span className="text-xl font-semibold">Price: <span className="text-gray-800 font-bold">₹{price}</span></span>
+        <span className="text-xl font-semibold">Discount Price: <span className="text-green-600 font-bold">₹{discountPrice}</span></span>
         <span className={`text-xl font-semibold ${stock > 0 ? "text-gray-800" : "text-red-500"}`}>
           Stock: {stock > 0 ? stock : "Out of Stock"}
         </span>

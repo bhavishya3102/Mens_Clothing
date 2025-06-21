@@ -105,11 +105,11 @@ export default function Page() {
                   <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
                   <p className="text-gray-600 mt-2">
                     <span className="line-through text-red-500 mr-2">
-                      ${product.price}
+                    ₹{product.price}
                     </span>
                     <span className="font-bold text-green-600">
-                      ${product.discount_price}
-                    </span>
+                    ₹{product.discount_price}
+                    </span> 
                   </p>
                 </div>
               </Link>
