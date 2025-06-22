@@ -49,7 +49,7 @@ const CardSlider = ({products, loading}: {products: Product[], loading: boolean}
   return (
     <div>
       {
-        products.length > 0?(
+        products.length > 0 || loading ?(
           <div className="relative w-[99%] max-w-8xl mx-auto">
           <div className="overflow-hidden">
             <div
